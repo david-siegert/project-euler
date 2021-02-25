@@ -21,17 +21,17 @@ function isDivisibleByThree(num) {
 
     numString = num.toString();
 
-    sum = 0;
+    sumOfDigits = 0;
     
     if(numString.length > 0){
 
         for (let index = 0; index < numString.length; index++) {
             const element = numString[index];
-            sum += parseInt(element);
+            sumOfDigits += parseInt(element);
         }
     }
 
-    return sum % 3 == 0;
+    return sumOfDigits % 3 == 0;
 }
 function isDivisibleByFive(num) {
     
