@@ -8,8 +8,8 @@
 sum = 0;
 
 for (index = 1; index < 1000; index++) {
-    
-    if(isDivisibleByFive(index) || isDivisibleByThree(index)){
+
+    if (isDivisibleByFive(index) || isDivisibleByThree(index)) {
         sum += index;
     }
 }
@@ -18,14 +18,14 @@ console.log(sum);
 
 
 function isDivisibleByThree(num) {
-    
+
     // true for 0 but we care only about integers
 
     numString = num.toString();
 
     sumOfDigits = 0;
-    
-    if(numString.length > 0){
+
+    if (numString.length > 0) {
 
         for (let index = 0; index < numString.length; index++) {
             const element = numString[index];
@@ -36,18 +36,18 @@ function isDivisibleByThree(num) {
     return sumOfDigits % 3 == 0;
 }
 function isDivisibleByFive(num) {
-    
+
     // true for 0 but we care only about integers
 
     numString = num.toString();
 
-    if(numString.length > 0){
+    if (numString.length > 0) {
 
         lastDigit = numString[numString.length - 1];
 
-        if(lastDigit == "0" || lastDigit == "5"){
+        if (lastDigit == "0" || lastDigit == "5") {
             return true
-        } 
+        }
     }
 
     return false;

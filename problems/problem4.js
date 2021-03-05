@@ -15,25 +15,25 @@ for (let index = 0; index < Object.keys(palindromArray).length; index++) {
     sqrt = Math.ceil((Math.sqrt(number)));
 
     for (let factor = sqrt; factor > 99; factor--) {
-        
-        if(number % factor == 0){
 
-            if(number / factor < 1000){
-                console.log(number + " = " + (number / factor) + " * " + factor); 
+        if (number % factor == 0) {
+
+            if (number / factor < 1000) {
+                console.log(number + " = " + (number / factor) + " * " + factor);
                 return;
             }
         }
     }
 }
 
-function GetCandidatePalindroms(){
+function GetCandidatePalindroms() {
 
     var palindroms = new Array();
     var numString = "";
 
     // 10 -> 99 && 0 -> 9
     for (let index = 10; index < 100; index++) {
-        
+
         numString = index.toString();
 
         var temp = "";

@@ -13,13 +13,13 @@ variable = 0;
 
 resultSum = 0;
 
-while(secondTerm < 4_000_000){
-    
+while (secondTerm < 4_000_000) {
+
     // in first iteration  we are checking number 2
-    if(isEven(secondTerm)){
+    if (isEven(secondTerm)) {
         resultSum += secondTerm;
     }
-    
+
     variable = firstTerm;
     firstTerm = secondTerm;
     secondTerm = variable + secondTerm;
@@ -27,23 +27,21 @@ while(secondTerm < 4_000_000){
 
 console.log(resultSum);
 
-    
 
-
-function isEven(number){
+function isEven(number) {
 
     numString = number.toString();
 
-    if(numString.length > 0){
+    if (numString.length > 0) {
 
         lastDigit = numString[numString.length - 1];
 
-        if( lastDigit == "0" || 
-            lastDigit == "2" || 
-            lastDigit == "4" || 
+        if (lastDigit == "0" ||
+            lastDigit == "2" ||
+            lastDigit == "4" ||
             lastDigit == "6" ||
-            lastDigit == "8"){
+            lastDigit == "8") {
             return true
-        } 
+        }
     }
 }
