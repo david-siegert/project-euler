@@ -36,13 +36,12 @@ for (let index = 1; index < 21; index++) {
         for (let j = 0; j < increment - currentCount; j++) {
             result.push(factor);            
         }
-
     }
 }
 
 console.log(result);
 
-// multiple factors in result array to get the smallest number we are looking for
+// multiply factors in result array to get the smallest number we are looking for
 var smallestNumber = 1;
 result.forEach(element => {
     smallestNumber = smallestNumber * element;
