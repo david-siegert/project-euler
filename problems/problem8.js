@@ -22,5 +22,30 @@ const num =
     "05886116467109405077541002256983155200055935729725" +
     "71636269561882670428252483600823257530420752963450";
 
-// Find the thirteen adjacent digits in the 1000-digit number that have the greatest product. What is the value of this product?
+// Find the thirteen adjacent digits in the 1000-digit number that have the greatest product.
+// What is the value of this product?
 
+var current = 0;
+var Arr = [];
+var tmpArr = [];
+var product = 1;
+for (let index = 0; index < 1000 - 13; index++) {
+
+    product = 1;
+    tmpArr = [];
+    for (let j = index; j < index + 13; j++) {
+
+        var digit = parseInt(num[j]);
+        product = product * digit;
+        tmpArr.push(digit);
+    }
+
+    if (product > current) {
+        console.log(current);
+        current = product;
+        Arr = tmpArr;
+    }
+
+}
+
+console.log(Arr + " = " + current);
