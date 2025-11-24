@@ -1,6 +1,7 @@
 # What is project-euler?
+
 https://projecteuler.net/
 
-Repository tracking my solutions to the Project Euler problems. Using javascript to get more familiar with it.
+Repository tracking my solutions to the Project Euler problems.
 
-Solved: 12
+Solved: 13
