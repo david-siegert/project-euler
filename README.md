@@ -4,4 +4,4 @@ https://projecteuler.net/
 
 Repository tracking my solutions to the Project Euler problems.
 
-Solved: 13
+Latest Solved: 51
