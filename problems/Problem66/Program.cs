@@ -1,168 +1,132 @@
-﻿// generate an array of integers without square numbers
+﻿using System.Diagnostics;
+using System.Numerics;
 
-var nonSquareNumbers = GenerateNonSquareNumbers(1000);
-//var perfectSquares = GeneratePerfectSquares();
 
-List<(long x, long D)> results = [];
-long tmp;
+Stopwatch stopwatch = new();
+stopwatch.Start();
 
-foreach (int D in nonSquareNumbers)
+int dWithLargestX = 0;
+BigInteger largestX = 0;
+BigInteger correspondingY = 0;
+
+for (int d = 2; d <= 1000; d++)
 {
-    Console.WriteLine($"Processing D={D}");
+    if (IsPerfectSquare(d))
+        continue;
 
-    for (long x = 1; x <= long.MaxValue; x++)
+    // sqrt(d) = [b_0; (period)]
+
+    CalculateContinuedFractionSqrtOf(d, out int b_0, out List<int> period);
+
+    // Console.WriteLine($"D = {d}");
+    // Console.WriteLine($"[{b_0}, ({(period.Count > 10 ? string.Join(", ", period.Take(10)) : string.Join(", ", period))}{(period.Count > 10 ? ", ..." : "")})]");
+
+    int N;
+    if (period.Count % 2 == 0)
+        N = period.Count - 1;  // For even period calculate convergents until period - 1
+    else
     {
-        tmp = x * x - 1;
+        N = 2 * period.Count - 1; // For odd period calculate convergents until 2 * period - 1
+        period.AddRange(period); // Duplicate the period for odd case
+    }
 
-        if (tmp < D) continue;
-        if ((x * x - 1) % D != 0) continue;
+    BigInteger A_prev_prev = 1;
+    BigInteger A_prev = b_0;
+    BigInteger B_prev_prev = 0;
+    BigInteger B_prev = 1;
 
-        long y_squared = (x * x - 1) / D;
+    for (int n = 0; n < N; n++)
+    {
+        int b_n = period[n];
 
-        if (IsPerfectSquareFast(y_squared))
-        {
-            results.Add((x, D));
+        BigInteger A_n = b_n * A_prev + A_prev_prev;
+        BigInteger B_n = b_n * B_prev + B_prev_prev;
+
+        A_prev_prev = A_prev;
+        A_prev = A_n;
+        B_prev_prev = B_prev;
+        B_prev = B_n;
+    }
+
+    if (A_prev > largestX)
+    {
+        largestX = A_prev;
+        correspondingY = B_prev;
+        dWithLargestX = d;
+    }
+
+}
+
+stopwatch.Stop();
+Console.WriteLine($"Execution Time: {stopwatch.ElapsedMilliseconds} ms");
+Console.WriteLine($"D with largest x in minimal solution: {dWithLargestX}");
+Console.WriteLine($"Numerator: {largestX}");
+Console.WriteLine($"Denominator: {correspondingY}");
+
+// check if Pell's equation is satisfied
+BigInteger leftSide = largestX * largestX - BigInteger.Multiply(dWithLargestX, correspondingY * correspondingY);
+Console.WriteLine($"Check Pell's equation: {largestX}^2 - {dWithLargestX}*{correspondingY}^2 = {leftSide}");
+
+void CalculateContinuedFractionSqrtOf(int d, out int a_0, out List<int> period)
+{
+    double sqrt_d = Math.Sqrt(d);
+
+    period = [];
+    List<(int p, int q)> seen = [];
+
+    int p = 0;
+    int q = 1;
+    double x = X(p, q, sqrt_d);
+    int a = A(x);
+
+    a_0 = a;
+
+    while (true)
+    {
+        int a_prev = a;
+        int q_prev = q;
+        int p_prev = p;
+
+        p = P(a_prev, q_prev, p_prev);
+        q = Q(d, p, q_prev);
+
+        // Check for cycle before calculating next iteration
+        if (seen.Contains((p, q)))
             break;
-        }
 
+        seen.Add((p, q));
+
+        x = X(p, q, sqrt_d);
+        a = A(x);
+        period.Add(a);
     }
-
-    File.AppendAllLines("results.txt", new[] { $"D={D}, x={results.Last().x}" });
 }
-
-results.Sort((r1, r2) => r1.x.CompareTo(r2.x));
-var result = results.Last();
-var result_y = GetIntegerSolution(result.D, 1 - result.x * result.x);
-bool verify = result.x * result.x - result.D * result_y * result_y == 1;
-
-Console.WriteLine($"D = {result.D}");
-Console.WriteLine($"x = {result.x}");
-Console.WriteLine($"y = {result_y}");
-Console.WriteLine($"x^2 - D*y^2 = 1 => {result.x}^2 - {result.D}*{result_y}^2 = 1 => {verify}");
-
-
-
-static long GetIntegerSolution(long a, long c)
+int P(int a_prev, int q_prev, int p_prev)
 {
-    // 0 = ax^2 + c 
-
-    long max = long.MaxValue;
-    long min = 0;
-    long x, f_x;
-    double f_x_double;
-
-    while (max - min > 1)
-    {
-        x = (max + min) / 2;
-
-        f_x_double = a * (double)x * x + c;
-        f_x = Math.Sign(f_x_double);
-
-        if (f_x == 0)
-        {
-            return x;
-        }
-        else if (f_x > 0)
-        {
-            max = x;
-        }
-        else
-        {
-            min = x;
-        }
-    }
-
-    return 0;
+    return a_prev * q_prev - p_prev;
 }
-static List<int> GenerateNonSquareNumbers(int upperBound)
+int Q(int d, int p, int q_prev)
 {
-    var nonSquares = new List<int>();
-    int number = 1;
-    int nextSquare = 1;
-    int squareRoot = 1;
-
-    while (number <= upperBound)
-    {
-        if (number == nextSquare)
-        {
-            // Skip perfect squares
-            squareRoot++;
-            nextSquare = squareRoot * squareRoot;
-        }
-        else
-        {
-            nonSquares.Add(number);
-        }
-        number++;
-    }
-
-    return nonSquares;
+    return (d - p * p) / q_prev;
 }
-static bool IsPerfectSquare(long n)
+double X(int p, int q, double sqrt_d)
+{
+    return (p + sqrt_d) / q;
+}
+int A(double x)
+{
+    return (int)Math.Floor(x);
+}
+bool IsPerfectSquare(int n)
 {
     if (n < 0) return false;
-    if (n < 2) return true;
+    if (n == 0 || n == 1) return true;
 
-    // Use Newton's method for initial estimate
-    long x = n;
-    long y = (x + 1) / 2;
+    // Get the integer square root, but account for floating-point precision issues
+    double sqrt_double = Math.Sqrt(n);
+    int sqrt_floor = (int)sqrt_double;
+    int sqrt_ceil = sqrt_floor + 1;
 
-    while (y < x)
-    {
-        x = y;
-        y = (x + n / x) / 2;
-    }
-
-    return x * x == n;
-}
-static bool IsPerfectSquareFast(long n)
-{
-    if (n < 0) return false;
-    if (n < 2) return true;
-
-    // Quick bit pattern check
-    if ((n & 2) != 0) return false; // Numbers ending in binary 10 or 11 can't be squares
-    if ((n & 7) == 5) return false; // Numbers ≡ 5 (mod 8) can't be squares
-    if ((n & 11) == 8) return false; // Numbers ≡ 8 (mod 12) can't be squares
-
-    long sqrt = (long)Math.Sqrt(n);
-    return sqrt * sqrt == n;
-}
-static bool IsPerfectSquareFasterThanFast(long n)
-{
-    if (n < 0) return false;
-    if (n < 2) return true;
-
-    // Quick rejection: perfect squares can only end in 0,1,4,5,6,9 in base 16
-    int lastHex = (int)(n & 0xF);
-    if (lastHex > 9) return false;
-    if (lastHex == 2 || lastHex == 3 || lastHex == 7 || lastHex == 8) return false;
-
-    // Quick rejection: check modulo small primes
-    if ((n % 3) == 2) return false;
-    if ((n % 7) == 3 || (n % 7) == 5 || (n % 7) == 6) return false;
-    if ((n % 11) == 2 || (n % 11) == 6 || (n % 11) == 7 || (n % 11) == 8 || (n % 11) == 10) return false;
-
-    // Use integer square root
-    long sqrt = (long)Math.Sqrt(n);
-
-    // Check sqrt and sqrt+1 to handle floating point precision issues
-    return sqrt * sqrt == n || (sqrt + 1) * (sqrt + 1) == n;
-}
-static bool IsPerfectSquareNewton(long n)
-{
-    if (n < 0) return false;
-    if (n < 2) return true;
-
-    // Start with a better initial guess
-    long x = n;
-    long y = (x + 1) >> 1; // Use bit shift for division by 2
-
-    while (y < x)
-    {
-        x = y;
-        y = (x + n / x) >> 1;
-    }
-
-    return x * x == n;
+    // Check both floor and ceiling, but ensure the square exactly equals n
+    return (sqrt_floor * sqrt_floor == n) || (sqrt_ceil * sqrt_ceil == n);
 }
