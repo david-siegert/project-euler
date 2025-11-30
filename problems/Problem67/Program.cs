@@ -1,31 +1,34 @@
 ﻿using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.Intrinsics.Arm;
 RunMeasured(() =>
 {
-    var triangle = LoadTriangleData();
-    //var triangle = TestTriangleData();
+    int[][] a = LoadTriangleData();
+    //int[][] a = TestTriangleData();
 
-    int sum = triangle[0][0];
-    int j = 0;
-    for (int i = 0; i < triangle.Length - 1; i++)
+    int[][] dp = new int[a.Length][];
+
+    // Initialize bottom row
+    int last = a.Length - 1;
+    dp[last] = new int[a.Length];
+    for (int j = 0; j < a.Length; j++)
     {
-        int leftTriangleSum = SubTriangleSum(i + 1, j, triangle);
-        int rightTriangleSum = SubTriangleSum(i + 1, j + 1, triangle);
-
-        if (leftTriangleSum > rightTriangleSum)
-        {
-            sum += triangle[i + 1][j];
-        }
-        else
-        {
-            sum += triangle[i + 1][j + 1];
-            j++;
-        }
-
+        dp[last][j] = a[last][j];
     }
 
-    return sum;
+    // Fill dp table from bottom to top
+    for (int i = last - 1; i >= 0; i--)
+    {
+        dp[i] = new int[i + 1];
+        for (int j = 0; j <= i; j++)
+        {
+            dp[i][j] = a[i][j] + Math.Max(dp[i + 1][j], dp[i + 1][j + 1]);
+        }
+    }
 
+    return dp[0][0];
 });
+
 
 
 void RunMeasured(Func<int> action)
@@ -39,6 +42,7 @@ void RunMeasured(Func<int> action)
     Console.WriteLine($"Elapsed time: {stopwatch.ElapsedMilliseconds} ms");
     Console.WriteLine($"result = {result}");
 }
+
 int[][] LoadTriangleData()
 {
     var lines = File.ReadAllLines("triangle.txt");
@@ -61,19 +65,4 @@ int[][] TestTriangleData()
         [2, 4, 6],
         [8, 5, 9, 3]
     ];
-}
-int SubTriangleSum(int rowIndex, int colIndex, int[][] triangle)
-{
-    int sum = 0;
-
-    for (int i = rowIndex; i < triangle.Length; i++)
-    {
-        // (i - rowIndex) gives the width of the sub-triangle at row i
-        for (int j = colIndex; j <= colIndex + (i - rowIndex); j++)
-        {
-            sum += triangle[i][j];
-        }
-    }
-
-    return sum;
 }
