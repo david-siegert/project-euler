@@ -1,9 +1,8 @@
 # What is project-euler?
 
-![Latest Problem](https://img.shields.io/badge/Latest%20Solved-Problem%2066-brightgreen?style=for-the-badge&logo=mathworks)
 ![Total Solved](https://img.shields.io/badge/Total%20Solved-15+-blue?style=for-the-badge&logo=checkmarx)
 ![Language](https://img.shields.io/badge/Language-C%23%20%7C%20JavaScript-purple?style=for-the-badge&logo=dotnet)
-![Difficulty](https://img.shields.io/badge/Difficulty-25%25-orange?style=for-the-badge&logo=target)
+![Difficulty](https://img.shields.io/badge/Max%20Difficulty-25%25-orange?style=for-the-badge&logo=target)
 
 https://projecteuler.net/
 
@@ -47,6 +46,7 @@ In the end I am making use of the AI tools, it would be stupid not to. But I am 
 -   **Pell's equation**: finding integer solutions to x² - Dy² = 1
 -   **Collatz conjecture**: understanding iterative sequences
 -   **Combinatorics**: permutations, combinations, and counting problems
+-   **Dynamic programming**: optimising plain recursion
 
 ### Technology
 
@@ -69,6 +69,7 @@ In the end I am making use of the AI tools, it would be stupid not to. But I am 
 -   **14** 🟢 Collatz conjecture
 -   **51** 🟢 Prime digit replacements
 -   **64, 65, 66** 🟢 Continued fractions of square roots and convergents
+-   **67** 🟢 Dynamic programming
 
 ### Problem 66
 
