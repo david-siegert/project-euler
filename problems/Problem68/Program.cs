@@ -1,7 +1,7 @@
 ﻿// Initialize variables
 using System.Numerics;
 
-int N = 5; // N-Gon 
+int N = 12; // N-Gon 
 int n = 2 * N; // Used numbers in N-Gon 1, 2, .., n
 // maximum total = (sum (1 + ... + n) + (1 + ... + N)) / N
 int Tmax = (7 * N + 3) / 2;
@@ -17,8 +17,12 @@ WrapInStopwatch(() =>
 {
     Summands = FindPossibleSummands();
 
+    OutputTotals();
+
     for (int t = Tmin; t <= Tmax; t++)
     {
+        Console.WriteLine("Finding sets for total " + t);
+
         solutionTripplesForT = [];
         for (int i = 1; i <= n; i++)
             FindSetsByTotalAndStartNumber(t, i);
@@ -141,7 +145,9 @@ bool ContainsNumber(List<(int a, int b, int c)> set, int number)
 {
     foreach ((int a, int b, int c) in set)
     {
-        return a == number || b == number || c == number;
+        if (a == number) return true;
+        if (b == number) return true;
+        if (c == number) return true;
     }
 
     return false;
@@ -170,14 +176,14 @@ void CheckNext(List<(int a, int b, int c)> current, int T)
     {
         // s1, b, s2
         (int a, int b, int c) trippleS1 = (s1, b, s2);
-        if (!ContainsNumber(current, s1) && !solutionTripplesForT.Contains(trippleS1))
+        if (!ContainsNumber(current, s1) && (!ContainsNumber(current, s2) || (s2 == current[0].b && current.Count == N - 1)) && !solutionTripplesForT.Contains(trippleS1))
         {
             CheckNext([.. current, trippleS1], T);
         }
 
         // s2, b, s1
         (int a, int b, int c) trippleS2 = (s2, b, s1);
-        if (!ContainsNumber(current, s2) && !solutionTripplesForT.Contains(trippleS2))
+        if (!ContainsNumber(current, s2) && (!ContainsNumber(current, s1) || (s1 == current[0].b && current.Count == N - 1)) && !solutionTripplesForT.Contains(trippleS2))
         {
             CheckNext([.. current, trippleS2], T);
         }

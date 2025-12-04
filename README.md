@@ -1,6 +1,6 @@
 # What is project-euler?
 
-![Total Solved](https://img.shields.io/badge/Total%20Solved-15+-blue?style=for-the-badge&logo=checkmarx)
+![Total Solved](https://img.shields.io/badge/Total%20Solved-20+-blue?style=for-the-badge&logo=checkmarx)
 ![Language](https://img.shields.io/badge/Language-C%23%20%7C%20JavaScript-purple?style=for-the-badge&logo=dotnet)
 ![Difficulty](https://img.shields.io/badge/Max%20Difficulty-25%25-orange?style=for-the-badge&logo=target)
 
@@ -57,10 +57,8 @@ In the end I am making use of the AI tools, it would be stupid not to. But I am 
 
 # Solved Problems
 
-![Latest Solved](https://img.shields.io/badge/Latest%20Solved-Problem%2066-success?style=flat-square&logo=checkmarx)
-![Progress](https://img.shields.io/badge/Progress-15%2B%20Problems-blue?style=flat-square&logo=trending-up)
-
-**Latest solved: 66** 🎯
+![Latest Solved](https://img.shields.io/badge/Latest%20Solved-Problem%2068-success?style=flat-square&logo=checkmarx)
+![Progress](https://img.shields.io/badge/Progress-20%2B%20Problems-blue?style=flat-square&logo=trending-up)
 
 ### Problem Categories Completed:
 
@@ -70,7 +68,13 @@ In the end I am making use of the AI tools, it would be stupid not to. But I am 
 -   **51** 🟢 Prime digit replacements
 -   **64, 65, 66** 🟢 Continued fractions of square roots and convergents
 -   **67** 🟢 Dynamic programming
+-   **68** 🟢 Magic 5-gon Ring: My algorithm solves for N-gon, Permutation search, Symmetry reduction, Efficient enumeration
 
 ### Problem 66
 
 At first I tried it naively and found it won't work - had to go back to 64 and 65 to learn concepts necessary for solving the problem. ChatGPT solved it in 10 seconds... But I learned a lot.
+
+### Problem 68
+
+I let my N-gon algorithm run for a dodecagon, and it found all solutions in under 13 minutes. This is an example with a total 43.
+![alt text](problems/Problem68/magic_dodecagon.png)
