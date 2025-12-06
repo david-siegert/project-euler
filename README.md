@@ -57,7 +57,7 @@ In the end I am making use of the AI tools; it would be stupid not to. But I am 
 
 # Solved Problems
 
-![Latest Solved](https://img.shields.io/badge/Latest%20Solved-Problem%2069-success?style=flat-square&logo=checkmarx)
+![Latest Solved](https://img.shields.io/badge/Latest%20Solved-Problem%2070-success?style=flat-square&logo=checkmarx)
 ![Progress](https://img.shields.io/badge/Progress-20%2B%20Problems-blue?style=flat-square&logo=trending-up)
 
 ### Problem Categories Completed:
@@ -69,7 +69,7 @@ In the end I am making use of the AI tools; it would be stupid not to. But I am 
 -   **64, 65, 66** 🟢 Continued fractions of square roots and convergents
 -   **67** 🟢 Dynamic programming
 -   **68** 🟢 Magic 5-gon Ring: My algorithm solves for N-gon, Permutation search, Symmetry reduction, Efficient enumeration
--   **69** 🟢 Euler's totient function: Using the Sieve of Eratosthenes to efficiently generate values for all n <= 1,000,000, reducing O(N²) to O(NloglogN) hours -> miliseconds
+-   **69, 70** 🟢 Euler's totient function: Using the Sieve of Eratosthenes to efficiently generate values for all n <= 1,000,000, reducing O(N²) to O(NloglogN) hours -> miliseconds
 
 ### Problem 66
 
