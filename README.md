@@ -21,16 +21,16 @@ The newest goal was to learn C# programming without Visual Studio using **VS Cod
 
 # AI tools, LLMs
 
-At this point AI tools are able to solve the problems in seconds giving right answers, which leads me to question whether the skills I am learning through these exercises are actually valuable when these tools are now superior and faster at logical reasoning than I can ever hope to be.
+At this point AI tools are able to solve the problems in seconds, giving the right answers, which leads me to question whether the skills I am learning through these exercises are actually valuable when these tools are now superior and faster at logical reasoning than I can ever hope to be.
 
 Arguments to continue:
 
--   You need to understand it to verify it - but do you? nowadays it is faster to test if it works
--   It is fun - well only if your idea of fun aren't only happy emotions :D
+-   You need to understand it to verify it - but do you? Nowadays it is faster to test if it works
+-   It is fun - well, only if your idea of fun isn't only happy emotions :D
 -   Building intuition for mathematical concepts
 -   The journey of discovery matters
 
-In the end I am making use of the AI tools, it would be stupid not to. But I am also very careful about what I have it do for me so that I fully understand the problem and am able to solve it myself. I am now using it as a smart friend to help me learn and also as a fast generator of what I already know and can quickly verify that I understand what and how it's doing it and that it is what I want. In order to not miss out on any learning.
+In the end I am making use of the AI tools; it would be stupid not to. But I am also very careful about what I have it do for me so that I fully understand the problem and am able to solve it myself. I am now using it as a smart friend to help me learn and also as a fast generator of what I already know and can quickly verify that I understand what and how it's doing it and that it is what I want, in order to not miss out on any learning.
 
 # What I learned
 
@@ -41,7 +41,7 @@ In the end I am making use of the AI tools, it would be stupid not to. But I am 
 -   **Algorithm optimization**: brute-forcing is never a good algorithm, and with clever algorithms you can bring exponential time down to milliseconds
 -   **Sieve of Eratosthenes**: efficient prime number generation
 -   **Newton's method**: fast square root approximation and optimization techniques
--   **Performance vs. readability**: sometimes(most of the time) Math.Sqrt() beats custom optimizations
+-   **Performance vs. readability**: sometimes (most of the time) Math.Sqrt() beats custom optimizations
 -   **Continued fractions**: representing square roots and finding convergents
 -   **Pell's equation**: finding integer solutions to x² - Dy² = 1
 -   **Collatz conjecture**: understanding iterative sequences
@@ -57,7 +57,7 @@ In the end I am making use of the AI tools, it would be stupid not to. But I am 
 
 # Solved Problems
 
-![Latest Solved](https://img.shields.io/badge/Latest%20Solved-Problem%2068-success?style=flat-square&logo=checkmarx)
+![Latest Solved](https://img.shields.io/badge/Latest%20Solved-Problem%2069-success?style=flat-square&logo=checkmarx)
 ![Progress](https://img.shields.io/badge/Progress-20%2B%20Problems-blue?style=flat-square&logo=trending-up)
 
 ### Problem Categories Completed:
@@ -69,12 +69,13 @@ In the end I am making use of the AI tools, it would be stupid not to. But I am 
 -   **64, 65, 66** 🟢 Continued fractions of square roots and convergents
 -   **67** 🟢 Dynamic programming
 -   **68** 🟢 Magic 5-gon Ring: My algorithm solves for N-gon, Permutation search, Symmetry reduction, Efficient enumeration
+-   **69** 🟢 Euler's totient function: Using the Sieve of Eratosthenes to efficiently generate values for all n <= 1,000,000, reducing O(N²) to O(NloglogN) hours -> miliseconds
 
 ### Problem 66
 
-At first I tried it naively and found it won't work - had to go back to 64 and 65 to learn concepts necessary for solving the problem. ChatGPT solved it in 10 seconds... But I learned a lot.
+At first I tried it naively and found it wouldn't work - had to go back to 64 and 65 to learn concepts necessary for solving the problem. ChatGPT solved it in 10 seconds... But I learned a lot.
 
 ### Problem 68
 
-I let my N-gon algorithm run for a dodecagon, and it found all solutions in under 13 minutes. This is an example with a total 43.
+I let my N-gon algorithm run for a dodecagon, and it found all solutions in under 13 minutes. This is an example with a total of 43.
 ![alt text](problems/Problem68/magic_dodecagon.png)

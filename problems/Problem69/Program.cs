@@ -1,64 +1,47 @@
-﻿int N = 1000_000;
-int maxN = 0;
-Dictionary<(int, int), int> GCDCache = [];
+﻿using System.Diagnostics;
+int N = 1000_000;
 
-WrapInStopwatch(() =>
+Stopwatch sw = Stopwatch.StartNew();
+
+// initialize bool[] [0:false, 1:false, 2:true, 3:true, 4:true,..., N:true]
+bool[] isPrime = new bool[N + 1];
+for (int n = 2; n <= N; n++)
 {
-    maxN = Enumerable.Range(2, N - 1).MaxBy(n => n / (double)Totient(n));
-});
-
-OutputMaximum();
-
-
-void WrapInStopwatch(Action action)
-{
-    var stopwatch = System.Diagnostics.Stopwatch.StartNew();
-    action();
-    stopwatch.Stop();
-    Console.WriteLine($"Elapsed time: {stopwatch.ElapsedMilliseconds} ms");
-}
-void OutputMaximum()
-{
-    Console.WriteLine($"For n <= {N}, n = {maxN} has the maximum value n/φ(n) = {maxN / (double)Totient(maxN)}");
+    isPrime[n] = true;
 }
 
-void CacheGCD(int a, int b, int value)
+int[] totient = new int[N + 1];
+for (int n = 0; n <= N; n++)
 {
-    for (int i = 1; i * a <= N && i * b <= N; i++)
+    totient[n] = n;
+}
+
+// List<List<int>> primeFactors = new(N + 1);
+// for (int n = 0; n <= N; n++)
+// {
+//     primeFactors.Add([]);
+// }
+
+int p = 1;
+while (++p <= N)
+{
+    if (!isPrime[p]) continue;
+
+    for (int n = 1; p * n <= N; n++)
     {
-        GCDCache[(a * i, b * i)] = value * i;
-        GCDCache[(b * i, a * i)] = value * i;
+        if (n != 1) isPrime[p * n] = false;
+
+        // primeFactors[p * n].Add(p);
+
+        // Using Euler's product formula for eulers totient function:
+        // φ(n) = n * ∏(1 - 1/p) for all prime p dividing n
+        // Initial value of totient[p*n] is p*n => p divides totient[p*n]
+        totient[p * n] = totient[p * n] / p * (p - 1);
     }
-
-}
-int GCD(int a, int b)
-{
-    if (GCDCache.TryGetValue((a, b), out int cachedGCD2))
-        return cachedGCD2;
-
-    int originalA = a;
-    int originalB = b;
-
-    while (b != 0)
-        (a, b) = (b, a % b);
-
-    CacheGCD(originalA, originalB, a);
-    return a;
-
-}
-int Totient(int n)
-{
-    int count = 0;
-
-    for (int i = 1; i < n; i++)
-    {
-        if (GCD(n, i) == 1)
-        {
-            count++;
-        }
-    }
-
-    return count;
 }
 
+int maxRatioN = Enumerable.Range(2, N - 1).MaxBy(n => n / (double)totient[n]);
 
+sw.Stop();
+Console.WriteLine($"Time: {sw.ElapsedMilliseconds} ms");
+Console.WriteLine($"N={N}, max n/φ(n) is at n={maxRatioN}, φ(n)={totient[maxRatioN]}, n/φ(n)={maxRatioN / (double)totient[maxRatioN]}");
