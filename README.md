@@ -1,6 +1,6 @@
 # What is project-euler?
 
-![Total Solved](https://img.shields.io/badge/Total%20Solved-20+-blue?style=for-the-badge&logo=checkmarx)
+![Total Solved](https://img.shields.io/badge/Total%20Solved-25+-blue?style=for-the-badge&logo=checkmarx)
 ![Language](https://img.shields.io/badge/Language-C%23%20%7C%20JavaScript-purple?style=for-the-badge&logo=dotnet)
 ![Difficulty](https://img.shields.io/badge/Max%20Difficulty-25%25-orange?style=for-the-badge&logo=target)
 
@@ -57,8 +57,8 @@ In the end I am making use of the AI tools; it would be stupid not to. But I am 
 
 # Solved Problems
 
-![Latest Solved](https://img.shields.io/badge/Latest%20Solved-Problem%2072-success?style=flat-square&logo=checkmarx)
-![Progress](https://img.shields.io/badge/Progress-20%2B%20Problems-blue?style=flat-square&logo=trending-up)
+![Latest Solved](https://img.shields.io/badge/Latest%20Solved-Problem%2073-success?style=flat-square&logo=checkmarx)
+![Progress](https://img.shields.io/badge/Progress-25%2B%20Problems-blue?style=flat-square&logo=trending-up)
 
 ### Problem Categories Completed:
 
@@ -70,8 +70,9 @@ In the end I am making use of the AI tools; it would be stupid not to. But I am 
 -   **67** 🟢 Dynamic programming
 -   **68** 🟢 Magic 5-gon Ring: My algorithm solves for N-gon, Permutation search, Symmetry reduction, Efficient enumeration
 -   **69, 70** 🟢 Euler's totient function: Using the Sieve of Eratosthenes to efficiently generate values for all n <= 1,000,000, reducing O(N²) to O(NloglogN) hours -> miliseconds
--   **71** 🟢 Ordered fractions - find closest neighbor from the left given max denominator
--   **72** 🟢 Ordered fractions count = sum of totient function values
+-   **71** 🟢 Ordered reduced fractions - find closest neighbor from the left given max denominator
+-   **72** 🟢 Ordered reduced fractions count = sum of totient function values
+-   **73** 🟢 Ordered reduced fractions count range
 
 ### Problem 66
 
