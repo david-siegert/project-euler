@@ -29,6 +29,12 @@ for (int start = 1; start < 1000_000; start++)
             break;
         }
 
+        if (chain.Count > 60) // max chain length is 60, so no need to continue
+        {
+            startNumSolved = true;
+            break;
+        }
+
         chain.Add(current);
         current = Next(current);
         indexOfCurrent = chain.IndexOf(current);
